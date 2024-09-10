@@ -6,6 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // POST method for sending emails
 export async function POST(req: NextRequest) {
+  const response = await req.json();
   try {
     const { data, error } = await resend.emails.send({
       from: 'safeShare@resend.dev',
