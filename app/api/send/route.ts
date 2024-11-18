@@ -11,8 +11,8 @@ export async function POST(req: NextRequest) {
     const { data, error } = await resend.emails.send({
       from: 'safeShare@resend.dev',
       to: ['19krishprasad06@gmail.com'],  // Hardcoded email recipient
-      subject: 'File shared to you',
-      react: EmailTemplate({ firstName: 'John' }),  // Hardcoded first name
+      subject: response?.userName + ' shared a file with you',
+      react: EmailTemplate({ response }),  // Hardcoded first name
     });
 
     if (error) {

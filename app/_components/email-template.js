@@ -11,7 +11,7 @@ import {
   Text,
 } from "@react-email/components";
 
-export const EmailTemplate = ({ firstName }) => (
+export const EmailTemplate = ({ response }) => (
   <Html>
     <Head />
     <Body style={main}>
@@ -23,15 +23,16 @@ export const EmailTemplate = ({ firstName }) => (
 
         {/* Greeting and File Information */}
         <Section style={content}>
-          <Heading style={greeting}>Hello {firstName},</Heading>
+          <Heading style={greeting}>Hi {response?.emailToSend?.split("@")[0]}</Heading>
           <Text style={paragraph}>
+            
             You have received a file. Below are the file details:
           </Text>
 
           {/* File Information */}
-          <Text style={paragraph}><b>File Name: </b></Text>
-          <Text style={paragraph}><b>File Type: </b></Text>
-          <Text style={paragraph}><b>File Size: </b></Text>
+          <Text style={paragraph}><b>File Name: {response.fileName} </b></Text>
+          <Text style={paragraph}><b>File Type: {response.fileType} </b></Text>
+          <Text style={paragraph}><b>File Size: {response.fileSize} KB </b></Text>
 
           {/* Download Button */}
           <Text style={thin}>*Access the download file on your risk</Text>
@@ -42,6 +43,7 @@ export const EmailTemplate = ({ firstName }) => (
               pX={20}
               pY={12}
               style={button}
+              href={response?.shortUrl}
                 // Redirect to file download
             >
               Click Here to Download
